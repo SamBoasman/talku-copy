@@ -38,25 +38,3 @@ mongoose
 const server = app.listen(process.env.PORT, () => {
   console.log(`Speak Lord!! Your server is running on Port ${process.env.PORT}`);
 });
-
-const io = socket(server, {
-  cors: {
-    origin: ["*", "https://talku-talku-v3.vercel.app", "https://talku-talku-v3-server-5wgbjqivt-vinyl-davyl.vercel.app", "https://talku-talku-v3-server.vercel.app"],
-    credentials: true,
-  },
-});
-
-global.onlineUsers = new Map();
-
-io.on("connection", (socket: any) => {
-  global.chatSocket = socket;
-  socket.on("add-user", (userId: string) => {
-    onlineUsers.set(userId, socket.id);
-  });
-  socket.on("send-msg", (data: any) => {
-    const sendUserSocket = onlineUsers.get(data.to);
-    if (sendUserSocket) {
-      socket.to(sendUserSocket).emit("msg-recieve", data.message);
-    }
-  });
-});
