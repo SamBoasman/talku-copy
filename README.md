@@ -11,9 +11,19 @@ Ever wanted to communicate with friends in real-time and you worry about accessi
 
 Talku Talku is a Realtime private Chat Application that runs majorly on the web, might metamorphose into apps to run on other platforms. Its a minimalistic platform where users can come, join rooms with other frineds/users to talk about all kinds of chit chat with real time experience.
 
-### Run server with
+### Operating Server
 
-`node --env-file=config.env dist/index.js`
+Modifications to the src code must be followed by a rebuild to the dist folder which can be executed using
+
+```
+npm run build
+```
+
+To run the server with the environment variables, use the following:
+
+```
+node --env-file=config.env dist/index.js
+```
 
 ### ✨ [Live Demo](https://talku-talku-v3.vercel.app)
 

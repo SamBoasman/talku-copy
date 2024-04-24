@@ -12,7 +12,9 @@ const messagesRoute_1 = __importDefault(require("./routes/messagesRoute"));
 const socket = require("socket.io");
 const app = (0, express_1.default)();
 require("dotenv").config();
-app.use((0, cors_1.default)());
+app.use((0, cors_1.default)({
+    origin: 'https://talku-copy-b9uu.vercel.app'
+}));
 //: Parses JSON and urlencoded request bodies with a maximum size of 30MB.
 app.use(body_parser_1.default.json({ limit: "30mb" }));
 app.use(body_parser_1.default.urlencoded({ limit: "30mb", extended: true }));
@@ -29,24 +31,5 @@ mongoose_1.default
     console.log(err.message);
 });
 const server = app.listen(process.env.PORT, () => {
-    console.log(`Speak Lord!! Your server is running on Port ${process.env.PORT} with MONGO_RUL ${process.env.MONGO_URL}`);
-});
-const io = socket(server, {
-    cors: {
-        origin: ["*", "https://talku-talku-v3.vercel.app", "https://talku-talku-v3-server-5wgbjqivt-vinyl-davyl.vercel.app", "https://talku-talku-v3-server.vercel.app"],
-        credentials: true,
-    },
-});
-global.onlineUsers = new Map();
-io.on("connection", (socket) => {
-    global.chatSocket = socket;
-    socket.on("add-user", (userId) => {
-        onlineUsers.set(userId, socket.id);
-    });
-    socket.on("send-msg", (data) => {
-        const sendUserSocket = onlineUsers.get(data.to);
-        if (sendUserSocket) {
-            socket.to(sendUserSocket).emit("msg-recieve", data.message);
-        }
-    });
+    console.log(`Speak Lord!! Your server is running on Port ${process.env.PORT}`);
 });
