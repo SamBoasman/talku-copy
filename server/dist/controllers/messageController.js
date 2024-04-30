@@ -33,6 +33,7 @@ const addMessage = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
 });
 exports.addMessage = addMessage;
 const getAllMessages = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    // The object passed to create()contains the properties of the new message.find({ users: { $all: [from, to] } }) This line finds all messages where the users field is an array containing both from and tosort({ updatedAt: 1 }); This line sorts the results by the updatedAt field in ascending order const projectMessages = messages.map((msg) => {This line creates a new array called projectMessages that maps over each message in the messages array and returns a new object with only the necessary fields res.json(projectMessages); This line sends the projectMessages array as a JSON response.
     try {
         const { from, to } = req.body;
         const messages = yield messageModel_1.default
