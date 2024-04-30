@@ -5,23 +5,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
-const cors_1 = __importDefault(require("cors"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 const messagesRoute_1 = __importDefault(require("./routes/messagesRoute"));
 const socket = require("socket.io");
 const app = (0, express_1.default)();
 require("dotenv").config();
-app.use((0, cors_1.default)());
-app.use(function (req, res, next) {
-    // intercept OPTIONS method
-    if (req.method == 'OPTIONS') {
-        res.send(200);
-    }
-    else {
-        next();
-    }
-});
 //: Parses JSON and urlencoded request bodies with a maximum size of 30MB.
 app.use(body_parser_1.default.json({ limit: "30mb" }));
 app.use(body_parser_1.default.urlencoded({ limit: "30mb", extended: true }));

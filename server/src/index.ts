@@ -15,17 +15,6 @@ declare global {
 const app = express();
 require("dotenv").config();
 
-app.use(cors());
-app.use(function(req, res, next) {
-  // intercept OPTIONS method
-  if (req.method == 'OPTIONS') {
-      res.send(200);
-  }
-  else {
-      next();
-  }
-});
-
 //: Parses JSON and urlencoded request bodies with a maximum size of 30MB.
 app.use(bodyParser.json({ limit: "30mb" }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
