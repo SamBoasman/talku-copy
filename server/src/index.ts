@@ -1,4 +1,4 @@
-import express from "express";
+import express, { NextFunction } from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import bodyParser from "body-parser";
@@ -16,7 +16,15 @@ const app = express();
 require("dotenv").config();
 
 app.use(cors());
-app.options('*', cors())
+app.use(function(req, res, next) {
+  // intercept OPTIONS method
+  if (req.method == 'OPTIONS') {
+      res.send(200);
+  }
+  else {
+      next();
+  }
+});
 
 //: Parses JSON and urlencoded request bodies with a maximum size of 30MB.
 app.use(bodyParser.json({ limit: "30mb" }));
