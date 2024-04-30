@@ -13,6 +13,7 @@ const socket = require("socket.io");
 const app = (0, express_1.default)();
 require("dotenv").config();
 app.use((0, cors_1.default)());
+app.options('*', (0, cors_1.default)());
 //: Parses JSON and urlencoded request bodies with a maximum size of 30MB.
 app.use(body_parser_1.default.json({ limit: "30mb" }));
 app.use(body_parser_1.default.urlencoded({ limit: "30mb", extended: true }));
@@ -33,7 +34,7 @@ const server = app.listen(process.env.PORT, () => {
 });
 const io = socket(server, {
     cors: {
-        origin: ["*", "https://talku-copy-b9uu.vercel.app", "https://talku-copy-n0xb5q8lc-sam-boasmans-projects.vercel.app", "https://talku-copy.vercel.app/"],
+        origin: ["*", "https://talku-copy-b9uu.vercel.app", "https://talku-copy-n0xb5q8lc-sam-boasmans-projects.vercel.app", "https://talku-copy.vercel.app"],
         credentials: true,
     },
 });
